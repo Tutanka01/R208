@@ -48,7 +48,7 @@ lignes concernant un capteur donné. Cette fonction prendra en entrée (aka en p
 de stockage ainsi que l'identifiant du capteur, et retournera comme résultat un nouveau tableau de
 stockage (même "format") contenant uniquement les lignes retenues."""
 
-def filtrage(id_capteur):
+def filtrage_id(id_capteur):
     data_temp = []
     for i in range(0, len(data)):
         if id_capteur in data[i]:
@@ -61,11 +61,11 @@ filtres, c'est-à-dire qu'elles prennent en entrée un tableau de stockage et un
 sortie un tableau de stockage, va nous permettre "d'emboîter" ces filtres pour réaliser des recherches
 multi-critères."""
 
-def filtrage_date(date, heure):
+def filtrage_date(date):
     data_temp = []
     for i in range(0, len(data)):
         if date in data[i]:
             data_temp.append(data[i])
     return data_temp
 
-print(data)
+print(filtrage_date([26,2,2024]))
