@@ -22,10 +22,16 @@ Implémenter la fonctionnalité permettant d'ajouter une nouvelle valeur (envoy�
 Cette fonction prend en paramètres les différentes informations, construit la nouvelle ligne et l'ajoute
 au tableau.
 """
-
+def cles():
+    #Append all the keys of a dico that is in a list in a list
+    cles_liste = []
+    for i in range(0, len(data)):
+        cles_liste.append(list(data[i].keys()))
+    return cles_liste
+        
 def ajout(id_capteur,date, heure, type_capteur, valeur):
     dico_temp = {}
-    dico_temp[id_capteur] = [date, heure, type_capteur, valeur]
+    dico_temp[str(id_capteur)] = [date, heure, type_capteur, valeur]
     data.append(dico_temp)
 
 # On insinue que la fonction ajout() est appelée à chaque fois qu'un capteur envoie une valeur
@@ -39,9 +45,6 @@ def affichage():
     for i in range(0, len(data)):
         print("La valeur d'indice {} est :".format(i), data[i])
     
-ajout(id_capteur,date, heure, type_capteur, valeur)
-ajout(id_capteur2,date2, heure2, type_capteur2, valeur2)
-ajout(id_capteur3,date3, heure3, type_capteur3, valeur3)
 
 """Implémenter la fonctionnalité permettant de filtrer un tableau de stockage pour ne conserver que les
 lignes concernant un capteur donné. Cette fonction prendra en entrée (aka en paramètre) un tableau
@@ -50,8 +53,9 @@ stockage (même "format") contenant uniquement les lignes retenues."""
 
 def filtrage_id(id_capteur):
     data_temp = []
-    for i in range(0, len(data)):
-        if id_capteur in data[i]:
+    cles_liste = cles()
+    for i in range(len(data)):
+        if id_capteur == int(cles_liste[i][0]):
             data_temp.append(data[i])
     return data_temp
 
@@ -60,12 +64,19 @@ un type de capteur donné, etc. . . Le fait que ces fonctions de sélection fonc
 filtres, c'est-à-dire qu'elles prennent en entrée un tableau de stockage et un critère pour retourner en
 sortie un tableau de stockage, va nous permettre "d'emboîter" ces filtres pour réaliser des recherches
 multi-critères."""
-
+# A finir
 def filtrage_date(date):
     data_temp = []
-    for i in range(0, len(data)):
-        if date in data[i]:
-            data_temp.append(data[i])
+    cles_liste = cles()
+    for i in range(len(data)):
+        for j in range(len(cles_liste)):
+            print(data[i][cles_liste[j][0]][0])
+            if date == data[i][cles_liste[j][0]][0]:
+                data_temp.append(data[i])
+                
     return data_temp
 
-print(filtrage_date([26,2,2024]))
+ajout(id_capteur, date, heure, type_capteur, valeur)
+ajout(id_capteur2, date2, heure2, type_capteur2, valeur2)
+ajout(id_capteur3, date3, heure3, type_capteur3, valeur3)
+print(filtrage_id(812169))
