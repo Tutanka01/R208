@@ -31,7 +31,9 @@ def cles():
     for i in range(0, len(data)):
         cles_liste.append(list(data[i].keys()))
     return cles_liste
-        
+
+def 
+   
 def ajout(id_capteur,date, heure, type_capteur, valeur):
     errors = ""
     dico_temp = {}
@@ -101,6 +103,38 @@ def str_liste(type): # Cette fonction permet de créer une liste à partir d'ent
             ele = int(input())
             lst.append(ele)
     return(lst)
+# valeur minimum/maximum/moyenne d'un capteur sur la totalité des données collectées (il y a
+# donc 3 fonctions à écrire)
+
+def min_val():
+    try:
+        lst_keys = cles()
+        min_val = data[0][lst_keys[0][0]][3]
+        for i in range(0, len(data)):
+            if data[i][lst_keys[i][0]][3] < min_val:
+                min_val = data[i][lst_keys[i][0]][3]
+        return min_val
+    except:
+        return 0
+def max_val():
+    lst_keys = cles()
+    min_val = data[0][lst_keys[0][0]][3]
+    for i in range(0, len(data)):
+        if data[i][lst_keys[i][0]][3] > min_val:
+            min_val = data[i][lst_keys[i][0]][3]
+    return min_val
+def moy_val():
+    lst_keys = cles()
+    somme = 0
+    for i in range(len(data)):
+        try:
+            somme += data[i][lst_keys[i][0]][3]
+        except IndexError:
+            print("L'index n'existe pas")
+        except KeyError:
+            print("La clé n'existe pas")
+    moy = somme / len(data)
+    return moy.__round__(2)
     
 def main():
     print("Bienvenue dans le programme de gestion des données de capteurs")
@@ -128,7 +162,9 @@ def main():
         print("Entrez la date que vous voulez filtrer (format jj/mm/aaaa) une valeur apres l'autre:  \n")
         date_filtre = str_liste('date')
         print(filtrage_date(date_filtre)) 
-    
+    else:
+        print("c'est faux mon reuf , tu dois choisir entre 1 et 4")
+        
 ajout(id_capteur, date, heure, type_capteur, valeur)
 ajout(id_capteur2, date2, heure2, type_capteur2, valeur2)
 ajout(id_capteur3, date3, heure3, type_capteur3, valeur3)
