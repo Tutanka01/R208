@@ -31,8 +31,6 @@ def cles():
     for i in range(0, len(data)):
         cles_liste.append(list(data[i].keys()))
     return cles_liste
-
-def 
    
 def ajout(id_capteur,date, heure, type_capteur, valeur):
     errors = ""
