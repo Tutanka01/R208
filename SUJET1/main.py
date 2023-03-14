@@ -118,11 +118,18 @@ def main():
         type_capteur = input("Entrez le type de capteur : ")
         valeur = float(input("Entrez la valeur relevée par le capteur : "))
         ajout(id_capteur, date, heure, type_capteur, valeur)
-    else:
-        pass
+    elif choix == 2:
+        print(data)
+    elif choix == 3:
+        print("Entrez l'identifiant du capteur que vous voulez filtrer : ")
+        capteur = int(input())
+        print(filtrage_id(capteur))
+    elif choix == 4:
+        print("Entrez la date que vous voulez filtrer (format jj/mm/aaaa) une valeur apres l'autre:  \n")
+        date_filtre = str_liste('date')
+        print(filtrage_date(date_filtre)) 
     
-#ajout(id_capteur, date, heure, type_capteur, valeur)
-#ajout(id_capteur2, date2, heure2, type_capteur2, valeur2)
-#ajout(id_capteur3, date3, heure3, type_capteur3, valeur3)
+ajout(id_capteur, date, heure, type_capteur, valeur)
+ajout(id_capteur2, date2, heure2, type_capteur2, valeur2)
+ajout(id_capteur3, date3, heure3, type_capteur3, valeur3)
 main()
-print(data)
