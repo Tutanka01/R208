@@ -1,3 +1,5 @@
+import sys
+
 date = [25,2,2024] # en format jour/mois/année
 heure = [12,30,55] # en format heure/minute/secondes
 id_capteur = 812167 # identifiant du capteur
@@ -10,7 +12,7 @@ id_capteur2 = 812169 # identifiant du capteur
 type_capteur2 = "température" # type de capteur
 valeur2 = 30 # valeur relevée par le capteur
 
-date3 = [26,2,2024] # en format jour/mois/année
+date3 = [27,2,2024] # en format jour/mois/année
 heure3 = [12,40,55] # en format heure/minute/secondes
 id_capteur3 = 812169 # identifiant du capteur
 type_capteur3 = "température" # type de capteur
@@ -22,6 +24,7 @@ Implémenter la fonctionnalité permettant d'ajouter une nouvelle valeur (envoy�
 Cette fonction prend en paramètres les différentes informations, construit la nouvelle ligne et l'ajoute
 au tableau.
 """
+
 def cles():
     #Append all the keys of a dico that is in a list in a list
     cles_liste = []
@@ -30,8 +33,22 @@ def cles():
     return cles_liste
         
 def ajout(id_capteur,date, heure, type_capteur, valeur):
+    errors = ""
     dico_temp = {}
     dico_temp[str(id_capteur)] = [date, heure, type_capteur, valeur]
+    
+    # verifier si la date est dans le bon format
+    if dico_temp[str(id_capteur)][0][0] > 31 or dico_temp[str(id_capteur)][0][1] > 12 or dico_temp[str(id_capteur)][0][2] > 2099:
+        errors += "La date n'est pas dans le bon format" + '\n'
+    # verifier si l'heure est dans le bon format
+    if dico_temp[str(id_capteur)][1][0] > 60 or dico_temp[str(id_capteur)][1][1] > 60 or dico_temp[str(id_capteur)][1][2] > 60:
+        errors += "L'heure n'est pas dans le bon format" + '\n'
+    # Il verifie si erros est vide, si oui, il ne fait rien, sinon, il quitte le programme et retourne toutes les ereurs
+    if errors == "":
+        pass
+    else:
+        sys.exit(errors)
+    
     data.append(dico_temp)
 
 # On insinue que la fonction ajout() est appelée à chaque fois qu'un capteur envoie une valeur
@@ -69,14 +86,43 @@ def filtrage_date(date):
     data_temp = []
     cles_liste = cles()
     for i in range(len(data)):
-        for j in range(len(cles_liste)):
-            print(data[i][cles_liste[j][0]][0])
-            if date == data[i][cles_liste[j][0]][0]:
-                data_temp.append(data[i])
-                
+        if date == data[i][cles_liste[i][0]][0]:
+            data_temp.append(data[i])    
     return data_temp
 
-ajout(id_capteur, date, heure, type_capteur, valeur)
-ajout(id_capteur2, date2, heure2, type_capteur2, valeur2)
-ajout(id_capteur3, date3, heure3, type_capteur3, valeur3)
-print(filtrage_id(812169))
+def str_liste(type): # Cette fonction permet de créer une liste à partir d'entrées de l'utilisateur
+    lst=[]
+    if type == "date":
+        for i in range(0,3):
+            ele = int(input())
+            lst.append(ele)
+    elif type == "heure":
+        for i in range(0,3):
+            ele = int(input())
+            lst.append(ele)
+    return(lst)
+    
+def main():
+    print("Bienvenue dans le programme de gestion des données de capteurs")
+    print("1. Ajouter une nouvelle valeur")
+    print("2. Afficher toutes les données collectées")
+    print("3. Filtrer les données par capteur")
+    print("4. Filtrer les données par date")
+    choix = int(input("Que voulez-vous faire ? "))
+    if choix == 1:
+        id_capteur = int(input("Entrez l'identifiant du capteur : "))
+        print("Entrez la date (format jj/mm/aaaa) en forme de tableau : ")
+        date = str_liste('date')
+        print("Entrez l'heure (format hh/mm/ss) en forme de tableau : ")
+        heure = str_liste('heure')
+        type_capteur = input("Entrez le type de capteur : ")
+        valeur = float(input("Entrez la valeur relevée par le capteur : "))
+        ajout(id_capteur, date, heure, type_capteur, valeur)
+    else:
+        pass
+    
+#ajout(id_capteur, date, heure, type_capteur, valeur)
+#ajout(id_capteur2, date2, heure2, type_capteur2, valeur2)
+#ajout(id_capteur3, date3, heure3, type_capteur3, valeur3)
+main()
+print(data)
