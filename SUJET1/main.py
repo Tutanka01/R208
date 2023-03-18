@@ -39,7 +39,7 @@ def ajout(id_capteur, date, heure, type_capteur, valeur):
     dico_temp[str(id_capteur)] = [date, heure, type_capteur, valeur]
     
     # vérifier si la date est valide
-    if dico_temp[str(id_capteur)][0][0] > 31 or dico_temp[str(id_capteur)][0][1] > 12 or dico_temp[str(id_capteur)][0][2] > 2099:
+    if dico_temp[str(id_capteur)][0][0] > 24 or dico_temp[str(id_capteur)][0][1] > 12 or dico_temp[str(id_capteur)][0][2] > 2099:
         errors += "La date n'est pas dans le bon format" + '\n'
     # vérifier si l'heure est valide
     if dico_temp[str(id_capteur)][1][0] > 60 or dico_temp[str(id_capteur)][1][1] > 60 or dico_temp[str(id_capteur)][1][2] > 60:
