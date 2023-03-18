@@ -31,13 +31,28 @@ class donnee():
     def affichage(self):
         for i in range(len(self.data[self.id_capteur])):
             print("La valeur d'indice {} est :".format(i), self.data[self.id_capteur][i])    
-        
-        
-        
+    # Pour le filtrage je me suis dit que dans aucun cas il y aura 2 id differents dans le meme objet
+    # car chaqu'un d'eux est un objet, on peut faire plus simple, je sais,  mais flemme :)
+    
+    def filtrage_id(self,id_capteur=int):
+        if id_capteur != self.id_capteur:
+            self.errors += "Votre id est invalide"
+            sys.exit(self.errors)
+        else:
+            return self.data[id_capteur]
+    
+    def filtrage_date(self, date = list):
+        if date not in self.data[self.id_capteur]:
+            self.errors += "Votre date est invalide"   
+            sys.exit(self.errors)
+        else:
+            return self.data[self.id_capteur]
+    
 donne1 = donnee(1248,[14,5,2012],[12,30,55],  "température", 25.5)
 donne2 = donnee(1249,[15,5,2012],[12,35,55],  "température", 27.5)
 
 
-print(donne1.ajout())
+donne1.ajout()
 donne2.ajout()
-print(donne2.affichage())
+
+print(donne2.filtrage_date([15,6,2012]))
