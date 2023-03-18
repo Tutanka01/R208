@@ -1,3 +1,4 @@
+#A FINIR!!!
 import sys
 
 # On Commence lea meme que main.py mais en objet :)
@@ -31,16 +32,16 @@ class donnee():
     def affichage(self):
         for i in range(len(self.data[self.id_capteur])):
             print("La valeur d'indice {} est :".format(i), self.data[self.id_capteur][i])    
+    
     # Pour le filtrage je me suis dit que dans aucun cas il y aura 2 id differents dans le meme objet
     # car chaqu'un d'eux est un objet, on peut faire plus simple, je sais,  mais flemme :)
-    
     def filtrage_id(self,id_capteur=int):
         if id_capteur != self.id_capteur:
             self.errors += "Votre id est invalide"
             sys.exit(self.errors)
         else:
             return self.data[id_capteur]
-    
+    # Ici je me suis dit la meme chose, a corriger si faux
     def filtrage_date(self, date = list):
         if date not in self.data[self.id_capteur]:
             self.errors += "Votre date est invalide"   
