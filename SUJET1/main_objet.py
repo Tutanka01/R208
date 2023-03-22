@@ -56,4 +56,4 @@ donne2 = donnee(1249,[15,5,2012],[12,35,55],  "température", 27.5)
 donne1.ajout()
 donne2.ajout()
 
-print(donne2.filtrage_date([15,6,2012]))
+print(donne2.affichage())
