@@ -1,5 +1,6 @@
 les_personnes = []
 lien_parente = []
+
 #1
 def ajout(tab, nom, prenom, sexe, date):
     tab.append([nom, prenom, sexe, date])
@@ -8,13 +9,12 @@ def ajout(tab, nom, prenom, sexe, date):
 def affichage(tab):
     for i in range(len(tab)):
         print("La personne d'indice {} est :".format(i), tab[i])
-#3
+#3 Implémenter la fonctionnalité permettant de sélectionner le numéro d'une personne.
 def num_personne(tab, nom, prenom):
     for i in range(len(tab)):
         if tab[i][0] == nom and tab[i][1] == prenom:
             return i
-    return -1
-#4 indice 0 est il est pere de ..., indice 1 est l'enfant de indice 0 (indice de la personne)
+#4
 def ajout_lien(tab, num1, num2):
     tab.append([num1, num2])
     return tab
@@ -66,12 +66,17 @@ def tri_age(tab):
 ajout(les_personnes, "DUPONT", "Jean", "M", [12, 5, 1980])
 ajout(les_personnes, "Yoan", "Croisier", "F", [26, 12, 2003])
 ajout(les_personnes, "El Akhal", "Mohamad", "M", [12, 5, 2003])
-ajout(les_personnes, "Noah", "Clergaud", "M", [31, 6, 2010])
-
+ajout(les_personnes, "Noah", "Clergaud-Metraud", "M", [31, 6, 2010])
+ajout(les_personnes, "Léa", "Clergaud-Metraud", "F", [25, 4 , 2010])
 
 ajout_lien(lien_parente, num_personne(les_personnes, "DUPONT", "Jean"), num_personne(les_personnes, "Yoan", "Croisier"))
 ajout_lien(lien_parente, num_personne(les_personnes, "DUPONT", "Jean"), num_personne(les_personnes, "El Akhal", "Mohamad"))
-ajout_lien(lien_parente, num_personne(les_personnes, "El Akhal", "Mohamad"), num_personne(les_personnes, "Yoan", "Croisier"))
+ajout_lien(lien_parente, num_personne(les_personnes, "Yoan", "Croisier"), num_personne(les_personnes, "El Akhal", "Mohamad"))
+ajout_lien(lien_parente, num_personne(les_personnes, "El Akhal", "Mohamad"), num_personne(les_personnes, "Noah", "Clergaud-Metraud"))
+ajout_lien(lien_parente, num_personne(les_personnes, "El Akhal", "Mohamad"), num_personne(les_personnes, "Léa", "Clergaud-Metraud"))
+ajout_lien(lien_parente, num_personne(les_personnes, "Yoan", "Croisier"), num_personne(les_personnes, "Lea", "Clergaud-Metraud"))
 
+print(les_personnes)
+print(lien_parente)
 
-print(tri(les_personnes))
+print(descendants(lien_parente, num_personne(les_personnes, "El Akhal", "Mohamad")))
