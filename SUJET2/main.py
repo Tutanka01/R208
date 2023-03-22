@@ -63,11 +63,73 @@ def tri_age(tab):
                         tab[i], tab[j] = tab[j], tab[i]
     return tab
 
+def menu():
+    print("1. Ajouter une personne")
+    print("2. Afficher les personnes")
+    print("3. Sélectionner le numéro d'une personne")
+    print("4. Ajouter un lien de parenté")
+    print("5. Afficher les ascendants d'une personne")
+    print("6. Afficher les descendants d'une personne")
+    print("7. Afficher les frères et soeurs d'une personne")
+    print("8. Trier les personnes par ordre alphabétique")
+    print("9. Trier les personnes par ordre d'âge")
+    print("10. Quitter")
+    choix = int(input("Votre choix : "))
+    return choix
+
+def main():
+    while True:
+        choix = menu()
+        if choix == 1:
+            nom = input("Nom : ")
+            prenom = input("Prénom : ")
+            sexe = input("Sexe : ")
+            date = input("Date de naissance : ")
+            date = date.split("/")
+            date = [int(date[0]), int(date[1]), int(date[2])]
+            ajout(les_personnes, nom, prenom, sexe, date)
+        elif choix == 2:
+            affichage(les_personnes)
+        elif choix == 3:
+            nom = input("Nom : ")
+            prenom = input("Prénom : ")
+            print(num_personne(les_personnes, nom, prenom))
+        elif choix == 4:
+            nom1 = input("Nom de la première personne : ")
+            prenom1 = input("Prénom de la première personne : ")
+            nom2 = input("Nom de la deuxième personne : ")
+            prenom2 = input("Prénom de la deuxième personne : ")
+            ajout_lien(lien_parente, num_personne(les_personnes, nom1, prenom1), num_personne(les_personnes, nom2, prenom2))
+        elif choix == 5:
+            nom = input("Nom : ")
+            prenom = input("Prénom : ")
+            print(ascendants(lien_parente, num_personne(les_personnes, nom, prenom)))
+        elif choix == 6:
+            nom = input("Nom : ")
+            prenom = input("Prénom : ")
+            print(descendants(lien_parente, num_personne(les_personnes, nom, prenom)))
+        elif choix == 7:
+            nom = input("Nom : ")
+            prenom = input("Prénom : ")
+            print(freres_soeurs(lien_parente, num_personne(les_personnes, nom, prenom)))
+        elif choix == 8:
+            print(tri(les_personnes))
+        elif choix == 9:
+            print(tri_age(les_personnes))
+        elif choix == 10:
+            break
+        else:
+            print("Erreur de saisie")
+
+
+
 ajout(les_personnes, "DUPONT", "Jean", "M", [12, 5, 1980])
 ajout(les_personnes, "Yoan", "Croisier", "F", [26, 12, 2003])
 ajout(les_personnes, "El Akhal", "Mohamad", "M", [12, 5, 2003])
 ajout(les_personnes, "Noah", "Clergaud-Metraud", "M", [31, 6, 2010])
 ajout(les_personnes, "Léa", "Clergaud-Metraud", "F", [25, 4 , 2010])
+ajout(les_personnes, "Wafa", "Bhamza", "F", [26, 4 , 2010])
+ajout(les_personnes, "lucas", "modric", "F", [27, 4 , 2010])
 
 ajout_lien(lien_parente, num_personne(les_personnes, "DUPONT", "Jean"), num_personne(les_personnes, "Yoan", "Croisier"))
 ajout_lien(lien_parente, num_personne(les_personnes, "DUPONT", "Jean"), num_personne(les_personnes, "El Akhal", "Mohamad"))
@@ -75,8 +137,7 @@ ajout_lien(lien_parente, num_personne(les_personnes, "Yoan", "Croisier"), num_pe
 ajout_lien(lien_parente, num_personne(les_personnes, "El Akhal", "Mohamad"), num_personne(les_personnes, "Noah", "Clergaud-Metraud"))
 ajout_lien(lien_parente, num_personne(les_personnes, "El Akhal", "Mohamad"), num_personne(les_personnes, "Léa", "Clergaud-Metraud"))
 ajout_lien(lien_parente, num_personne(les_personnes, "Yoan", "Croisier"), num_personne(les_personnes, "Lea", "Clergaud-Metraud"))
+ajout_lien(lien_parente, num_personne(les_personnes, "Yoan", "Croisier"), num_personne(les_personnes, "Wafa", "Bhamza"))
+ajout_lien(lien_parente, num_personne(les_personnes, "Wafa", "Bhamza"), num_personne(les_personnes, "lucas", "modric"))
 
-print(les_personnes)
-print(lien_parente)
-
-print(descendants(lien_parente, num_personne(les_personnes, "El Akhal", "Mohamad")))
+menu()
