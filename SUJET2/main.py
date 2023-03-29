@@ -34,20 +34,27 @@ def descendants(tab, num):
     return descendants
 
 #7 Idem pour les frères et soeurs d'une personne donnée.
+
 def freres_soeurs(tab, num):
-    # Create an empty list
     freres_soeurs = []
-    # For each element in the list
+    pere = []
+    errors = ""
+    print(len(tab))
     for i in range(len(tab)):
-        # If the first element of the element is equal to num
-        if tab[i][0] == num:
-            # Append the second element of the element to the list
+        if tab[i][1] == num:
+            print(tab[i][1])
+            pere.append(tab[i][0])
+
+    for i in range(len(tab)):
+        if tab[i][0] == pere[0]:
             freres_soeurs.append(tab[i][1])
-    # Return the list
+    
+    for i in range(len(freres_soeurs)):
+        if freres_soeurs[i] == num:
+            freres_soeurs.pop(i)
     return freres_soeurs
+    
 #8
-
-
 def tri(tab):
     for i in range(len(tab)): #Pour chaque personne de la liste
         for j in range(len(tab)): #On compare la personne à toutes les autres personnes de la liste
@@ -131,9 +138,8 @@ def main():
             print(descendants(lien_parente, num_personne(les_personnes, nom, prenom)))
        
         elif choix == 7:
-            nom = input("Nom : ")
-            prenom = input("Prénom : ")
-            print(freres_soeurs(lien_parente, num_personne(les_personnes, nom, prenom)))
+            num = int(input("Numéro de la personne : "))
+            print(freres_soeurs(lien_parente, num))
         
         elif choix == 8:
             print(tri(les_personnes))
@@ -162,9 +168,9 @@ ajout_lien(lien_parente, num_personne(les_personnes, "DUPONT", "Jean"), num_pers
 ajout_lien(lien_parente, num_personne(les_personnes, "Sophie", "Metatidj"), num_personne(les_personnes, "El Akhal", "Mohamad"))
 ajout_lien(lien_parente, num_personne(les_personnes, "El Akhal", "Mohamad"), num_personne(les_personnes, "Noah", "Clergaud-Metraud"))
 ajout_lien(lien_parente, num_personne(les_personnes, "El Akhal", "Mohamad"), num_personne(les_personnes, "Léa", "Clergaud-Metraud"))
-ajout_lien(lien_parente, num_personne(les_personnes, "Sophie", "Metatidj"), num_personne(les_personnes, "Lea", "Clergaud-Metraud"))
+ajout_lien(lien_parente, num_personne(les_personnes, "Sophie", "Metatidj"), num_personne(les_personnes, "Léa", "Clergaud-Metraud"))
 ajout_lien(lien_parente, num_personne(les_personnes, "Sophie", "Metatidj"), num_personne(les_personnes, "Wafa", "Bhamza"))
 ajout_lien(lien_parente, num_personne(les_personnes, "Wafa", "Bhamza"), num_personne(les_personnes, "lucas", "modric"))
-
+print(lien_parente)
 
 main()
